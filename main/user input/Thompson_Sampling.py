@@ -41,21 +41,21 @@ def reinforce(db):
             ads_selected.append(ad)
             numbers_of_selections[ad] = numbers_of_selections[ad] + 1
             try:
-                print("Advertisement " + str(ad + 1) + " is on the display.Press 1 to watch or 2 to skip.")
+                print("Advertisement " + str(ad + 1) + " is on the display.Press 2 to watch or 3 to skip.")
                 userchoice = int(input())
-                if userchoice == 1:
+                if userchoice == 2:
                     print("thank you for watching")
                     alladv[ad].append(1)
                     for i in range(len(alladv)):
                         if i != ad:
                             alladv[i].append(0)
-                elif userchoice == 2:
+                elif userchoice == 3:
                     for i in range(len(alladv)):
                         alladv[i].append(0)
                 df = pd.DataFrame({"Ad1": Ad1, "Ad2": Ad2, "Ad3": Ad3, "Ad4": Ad4, "Ad5": Ad5})
                 df.to_csv(csv_filename + '.csv', index = False)
             except ValueError:
-                print("Invalid value, Please press 1 or 2")
+                print("Invalid key, Please enter valid key value 2 or 3")
             reward = alladv[ad][n]
             if reward == 1:
                 numbers_of_rewards_1[ad] = numbers_of_rewards_1[ad] + 1
@@ -66,4 +66,3 @@ def reinforce(db):
             print(numbers_of_selections)
 
 reinforce(df)
-
